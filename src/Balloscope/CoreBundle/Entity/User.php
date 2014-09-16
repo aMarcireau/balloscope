@@ -40,6 +40,16 @@ class User
 
 
     /**
+     * Get number of balls
+     *
+     * @return integer 
+     */
+    public function getNumberOfBalls()
+    {
+        return $this->getBalls()->count();
+    }
+
+    /**
      * Get id
      *
      * @return integer 

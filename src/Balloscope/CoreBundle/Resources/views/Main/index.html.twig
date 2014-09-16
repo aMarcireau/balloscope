@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+    {% javascripts
+        '../vendor/twbs/bootstrap/js/transition.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+    {% for user in users %}
+        <div>{{ user.name }}</div>
+        <div>{{ user.numberOfBalls }}</div>
+    {% endfor %}
+
+{% endblock %}

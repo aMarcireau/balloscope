@@ -34,7 +34,7 @@ class LoadBallData extends AbstractFixture implements DependentFixtureInterface
         foreach(array_keys($usersNamesByReference) as $userReference)
         {
             $indexMax = rand(0, 4);
-            for ($index = 0; $index <= $indexMax; $index++) 
+            for ($index = 0; $index <= $indexMax; $index++)
             {
                 $ball = new Ball();
                 $ball ->setUser($this->getReference($userReference));

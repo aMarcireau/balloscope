@@ -17,9 +17,9 @@
 {% block body %}
 {{ parent() }}
     <div class="wrapper">
-        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringId: "cyanRing", ringColor: "cyan"} %}
-        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringId: "magentaRing", ringColor: "magenta"} %}
-        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringId: "greenRing", ringColor: "green"} %}
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "cyanRing"} %}
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "magentaRing"} %}
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "greenRing"} %}
     
         <div class="wheel">
     

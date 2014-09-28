@@ -22,7 +22,7 @@ html, body, .wrapper {
 
     .green();
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     border-style: solid;
     border-width: @wheel-ring-thickness;
     background-color: @wheel-background;
@@ -57,7 +57,7 @@ html, body, .wrapper {
         position: absolute;
         bottom: 50%;
         left: 50% - (@user-container-size / 2);
-        z-index: 10;
+        z-index: 4;
         width: @user-container-size;
         height: 50% + ((@user-container-size - @wheel-ring-spacing) / 2);
         
@@ -176,7 +176,7 @@ html, body, .wrapper {
         position: absolute;
         top: (@wheel-ring-spacing / 2);
         left: (@wheel-ring-spacing / 2);
-        z-index: 2;
+        z-index: 3;
         border-style: solid;
         border-width: @wheel-ring-thickness;
     }
@@ -187,8 +187,80 @@ html, body, .wrapper {
         position: absolute;
         top: (@wheel-ring-spacing / 2) * 2;
         left: (@wheel-ring-spacing / 2) * 2;
-        z-index: 2;
+        z-index: 3;
         border-style: solid;
         border-width: @wheel-ring-thickness;
+    }
+}
+
+.ring {
+    z-index: 1;
+    position: absolute;
+    border-style: solid;
+    border-width: @ring-thickness;
+    
+    
+    .middle-ring {
+        position: absolute;
+        top: 50% - (@middle-ring-diameter / 2);
+        left: 50% - (@middle-ring-diameter / 2);
+        border-style: solid;
+        border-width: @middle-ring-thickness;
+        .responsive-circle(@middle-ring-diameter);
+    
+        .inner-ring {
+            position: absolute;
+            top: 50% - (@inner-ring-diameter / 2);
+            left: 50% - (@inner-ring-diameter / 2);
+            .responsive-circle(@inner-ring-diameter);
+        }
+    }
+
+    &.cyanRing {
+        top: 0;
+        left: -(@cyan-ring-diameter / 2);
+    
+        .responsive-circle(@cyan-ring-diameter);
+        .cyan();
+        
+        .middle-ring {
+            .cyan();
+            
+            .inner-ring {
+                background: @cyan-color;
+            }
+        }
+    }
+    
+    &.magentaRing {
+        top: -(@magenta-ring-diameter / 2) + 30%;
+        right: -(@magenta-ring-diameter / 2);
+    
+        .responsive-circle(@magenta-ring-diameter);
+        .magenta();
+        
+        .middle-ring {
+            .magenta();
+            
+            .inner-ring {
+                background: @magenta-color;
+            }
+        }
+    }
+    
+    &.greenRing {
+        bottom: 0;
+        left: 25% - (@green-ring-diameter / 2);
+    
+        .responsive-circle(@green-ring-diameter);
+        .green();
+        
+        .middle-ring {
+            .green();
+            
+            .inner-ring {
+                background: @green-color;
+            }
+        }
     }
 }

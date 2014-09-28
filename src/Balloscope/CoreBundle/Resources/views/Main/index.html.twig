@@ -4,17 +4,42 @@
 {{ parent() }}
     {% javascripts
         '../vendor/twbs/bootstrap/js/transition.js'
+        '@BalloscopeCoreBundle/Resources/public/js/propeller.min.js'
+        '@BalloscopeCoreBundle/Resources/public/js/arctext.jquery.js'
+        '@BalloscopeCoreBundle/Resources/public/js/balloscope.jquery.js'
     %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 
 {% block body %}
 {{ parent() }}
-
-    {% for user in users %}
-        <div>{{ user.name }}</div>
-        <div>{{ user.numberOfBalls }}</div>
-    {% endfor %}
-
+    <div class="wrapper">
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "cyanRing"} %}
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "magentaRing"} %}
+        {% include 'BalloscopeCoreBundle:Main:ring.html.twig' with { ringClass: "greenRing"} %}
+    
+        <div class="wheel errorizable inactivable">
+    
+            {% for user in users %}
+                <div class="user-tab" style="
+                    -webkit-transform: rotate({{ loop.index0 / loop.length * 360 }}deg);
+                            transform: rotate({{ loop.index0 / loop.length * 360 }}deg);
+                ">  
+                    <div class="user-container">
+                        <div class="user-name curved-text">{{ user.name }}</div>
+                        <div class="balls-count curved-text" id="{{ user.id }}">{{ user.numberOfBalls }}</div>
+                        <div class="add-two-balls" data-id="{{ user.id }}">
+                            <div class="add-two-balls-label">+2</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="wheel-middle-ring"></div>
+            <div class="wheel-inner-ring"></div>
+        </div>
+    </div>
 {% endblock %}

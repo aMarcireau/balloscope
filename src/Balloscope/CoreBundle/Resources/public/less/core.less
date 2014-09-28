@@ -1,0 +1,401 @@
+html, body, .wrapper {
+    .user-select(none);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.green {
+    border-color: @green-color;
+}
+
+.magenta {
+    border-color: @magenta-color;
+}
+
+.cyan {
+    border-color: @cyan-color;
+}
+
+.grey {
+    border-color: @grey-color;
+}
+
+.wheel {
+    font-family: @wheel-font-family;
+
+    .green();
+    position: absolute;
+    z-index: 2;
+    border-style: solid;
+    border-width: @wheel-ring-thickness;
+    background-color: @wheel-background;
+    
+    &:hover {
+        cursor: move;
+    }
+    
+    &.error {
+        .grey();
+        
+        .user-tab {
+            .user-container {
+                .magenta();
+                
+                .curved-text {
+                    color:  @magenta-color;
+                }
+                
+                .add-two-balls {
+                    background: @magenta-color;
+                    
+                    &:hover {
+                        cursor: default;
+                        background: @magenta-color;
+                    }
+                    
+                    &:active {
+                        background: @magenta-color;
+                    }
+                }
+            }
+        }
+        
+        .wheel-middle-ring,
+        .wheel-inner-ring {
+            .grey();
+        }
+    }
+    
+    &.inactive {
+        .grey();
+        
+        .user-tab {
+            .user-container {
+                .grey();
+                
+                .curved-text {
+                    color: @grey-color;
+                }
+                    
+                .add-two-balls {
+                    background: @grey-color;
+                    
+                    &:hover {
+                        cursor: default;
+                        background: @grey-color;
+                    }
+                    
+                    &:active {
+                        background: @grey-color;
+                    }
+                }
+                
+                &.waiting {
+                    .green();
+                    
+                    .curved-text {
+                        color: @green-color;
+                    }
+                        
+                    .add-two-balls {
+                        background: @green-color;
+                        
+                        &:hover {
+                            cursor: default;
+                            background: @green-color;
+                        }
+                        
+                        &:active {
+                            background: @green-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .wheel-middle-ring,
+        .wheel-inner-ring {
+            .grey();
+        }
+    }
+    
+    @media (max-width: @screen-xs-max) { 
+        .responsive-circle(@wheel-diameter-xs);
+        top: @wheel-top-xs;
+        right: @wheel-right-xs;
+    }
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+        .responsive-circle(@wheel-diameter-sm);
+        top: @wheel-top-sm;
+        right: @wheel-right-sm;
+    }
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        .responsive-circle(@wheel-diameter-md);
+        top: @wheel-top-md;
+        right: @wheel-right-md;
+    }
+    @media (min-width: @screen-lg-min) {
+        .responsive-circle(@wheel-diameter-lg);
+        top: @wheel-top-lg;
+        right: @wheel-right-lg;
+    }
+    
+    .user-tab {
+        .transform-origin(center bottom);
+        position: absolute;
+        bottom: 50%;
+        left: 50% - (@user-container-size / 2);
+        z-index: 4;
+        width: @user-container-size;
+        height: 50% + ((@user-container-size - @wheel-ring-spacing) / 2);
+        
+        .user-container {
+            .cyan();
+            .responsive-circle(100%);
+            position: absolute;
+            top: 0;
+            left: 0;    
+            border-style: solid;
+            border-width: @wheel-ring-thickness;
+            background:  @user-container-background;
+            
+            .curved-text {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+                color: @curved-text-font-color;
+                
+                &.user-name {
+                    top: 0;
+                }
+                
+                &.balls-count {
+                    bottom: 0;
+                }
+            
+            }
+            
+            @media (max-width: @screen-xs-max) { 
+                .curved-text {
+                    font-size: @curved-text-font-size-xs;
+                }
+                
+                .add-two-balls {
+                    .add-two-balls-label {
+                        font-size: @add-two-balls-font-size-xs;
+                    }
+                }
+            }
+            @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+                .curved-text {
+                    font-size: @curved-text-font-size-sm;
+                }
+                
+                .add-two-balls {
+                    .add-two-balls-label {
+                        font-size: @add-two-balls-font-size-sm;
+                    }
+                }
+            }
+            @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+                .curved-text {
+                    font-size: @curved-text-font-size-md;
+                }
+                
+                .add-two-balls {
+                    .add-two-balls-label {
+                        font-size: @add-two-balls-font-size-md;
+                    }
+                }     
+            }
+            @media (min-width: @screen-lg-min) {
+                .curved-text {
+                    font-size: @curved-text-font-size-lg;
+                }
+                
+                .add-two-balls {
+                    .add-two-balls-label {
+                        font-size: @add-two-balls-font-size-lg;
+                    }
+                }   
+            }
+
+            .add-two-balls {
+                width: @balls-count-size;
+                height: @balls-count-size;
+                position: absolute;
+                border-radius: 50%;
+                top: 50% - (@balls-count-size / 2);
+                left: 50% - (@balls-count-size / 2);
+                text-align: center;
+                background: @add-two-balls-color;
+                
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    height: 100%;
+                    vertical-align: middle;
+                    margin-right: -0.25em;
+                }
+                
+                .add-two-balls-label {
+                    display: inline-block;
+                    vertical-align: middle;
+                    color: white;
+                }
+                
+                &:hover {
+                    cursor: pointer;
+                    background: @add-two-balls-hover-color;
+                }
+                
+                &:active {
+                    background: @add-two-balls-active-color;
+                }
+            }
+        }
+    }
+    
+    .wheel-middle-ring {
+        .responsive-circle(100% - @wheel-ring-spacing);
+        .magenta();
+        position: absolute;
+        top: (@wheel-ring-spacing / 2);
+        left: (@wheel-ring-spacing / 2);
+        z-index: 3;
+        border-style: solid;
+        border-width: @wheel-ring-thickness;
+        
+        &.error,
+        &.inactive {
+            .grey();
+        }
+    }
+    
+    .wheel-inner-ring {
+        .responsive-circle(100% - @wheel-ring-spacing * 2);
+        .cyan();
+        position: absolute;
+        top: (@wheel-ring-spacing / 2) * 2;
+        left: (@wheel-ring-spacing / 2) * 2;
+        z-index: 3;
+        border-style: solid;
+        border-width: @wheel-ring-thickness;
+        
+        &.error,
+        &.inactive {
+            .grey();
+        }
+    }
+}
+
+.ring {
+    z-index: 1;
+    position: absolute;
+    border-style: solid;
+    border-width: @ring-thickness;
+    
+    
+    .middle-ring {
+        position: absolute;
+        top: 50% - (@middle-ring-diameter / 2);
+        left: 50% - (@middle-ring-diameter / 2);
+        border-style: solid;
+        border-width: @middle-ring-thickness;
+        .responsive-circle(@middle-ring-diameter);
+    
+        .inner-ring {
+            position: absolute;
+            top: 50% - (@inner-ring-diameter / 2);
+            left: 50% - (@inner-ring-diameter / 2);
+            .responsive-circle(@inner-ring-diameter);
+        }
+    }
+
+    &.cyanRing {
+        top: 0;
+        left: -(@cyan-ring-diameter / 2);
+    
+        .responsive-circle(@cyan-ring-diameter);
+        .cyan();
+        
+        .middle-ring {
+            .cyan();
+            
+            .inner-ring {
+                background: @cyan-color;
+            }
+        }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
+            }
+        }
+    }
+    
+    &.magentaRing {
+        top: -(@magenta-ring-diameter / 2) + 30%;
+        right: -(@magenta-ring-diameter / 2);
+    
+        .responsive-circle(@magenta-ring-diameter);
+        .magenta();
+        
+        .middle-ring {
+            .magenta();
+            
+            .inner-ring {
+                background: @magenta-color;
+            }
+        }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
+            }
+        }
+    }
+    
+    &.greenRing {
+        bottom: 0;
+        left: 25% - (@green-ring-diameter / 2);
+    
+        .responsive-circle(@green-ring-diameter);
+        .green();
+        
+        .middle-ring {
+            .green();
+            
+            .inner-ring {
+                background: @green-color;
+            }
+        }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
+            }
+        }
+    }
+}

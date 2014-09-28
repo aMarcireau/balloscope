@@ -21,13 +21,16 @@ var Balloscope = {
 
         refreshInterval:     5000,
         buttonClass:         "add-two-balls",
-        buttonDisabledClass: "disabled",
-        buttonErrorClass:    "error",
         ballsCountClass:     "balls-count",
         wheelClass:          "wheel",
         userNameClass:       "user-name",
         ballsCountClass:     "balls-count",
         userContainerClass:  "user-container",
+        errorizableClass:    "errorizable",
+        errorClass:          "error",
+        inactivableClass:    "inactivable",
+        inactiveClass:       "inactive",
+        waitingClass:        "waiting",
     
     
     /**
@@ -168,6 +171,7 @@ var Balloscope = {
             
             if (!that.preventRefresh) {
                 that.disableInterface();
+                that.waitingInterface(userId);
     
                 $.getJSON(Routing.generate('balloscope_core_main_ajaxaddtwoballs', {id: userId}))
                 
@@ -187,6 +191,17 @@ var Balloscope = {
         
         
         /**
+         * Waiting interface
+         *
+         */
+        waitingInterface: function(userId) {
+            that = this;
+        
+            $("#" + userId).parent().addClass(that.waitingClass);
+        },
+        
+        
+        /**
          * Enable interface
          *
          */
@@ -196,11 +211,14 @@ var Balloscope = {
             if (that.interface !== "enabled") {
                 that.interface = "enabled";
             
+            
                 $("." + that.buttonClass).click(function() {
                     that.addTwoBalls($(this).attr("data-id"));
                 });
                 
-                $("." + that.buttonClass).removeClass(that.buttonDisabledClass).removeClass(that.buttonErrorClass);
+                $("." + that.errorClass).removeClass(that.errorClass);
+                $("." + that.inactiveClass).removeClass(that.inactiveClass);
+                $("." + that.waitingClass).removeClass(that.waitingClass);
             }
             
             $("." + that.wheelClass).propeller({inertia: 0.9})
@@ -224,7 +242,8 @@ var Balloscope = {
             
                 $("." + that.buttonClass).unbind("click");
                 
-                $("." + that.buttonClass).removeClass(that.buttonDisabledClass).removeClass(that.buttonErrorClass);
+                $("." + that.errorClass).removeClass(that.errorClass);
+                $("." + that.inactivableClass).addClass(that.inactiveClass);
             }
         },
          
@@ -241,8 +260,12 @@ var Balloscope = {
             
             if (that.interface !== "error") {
                 that.interface = "error";
+                
+                $("." + that.inactiveClass).removeClass(that.inactiveClass);
+                $("." + that.waitingClass).removeClass(that.waitingClass);
+                $("." + that.errorizableClass).addClass(that.errorClass);
             }
         
-            that.refresh({error: true});
+            that.refreshTimeout = setTimeout(function() { that.refresh({that: that, error: true}); }, that.refreshInterval);
         }
 }

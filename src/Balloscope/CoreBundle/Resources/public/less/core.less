@@ -16,6 +16,10 @@ html, body, .wrapper {
     border-color: @cyan-color;
 }
 
+.grey {
+    border-color: @grey-color;
+}
+
 .wheel {
     .user-select(none);
     font-family: @wheel-font-family;
@@ -29,6 +33,91 @@ html, body, .wrapper {
     
     &:hover {
         cursor: move;
+    }
+    
+    &.error {
+        .grey();
+        
+        .user-tab {
+            .user-container {
+                .magenta();
+                
+                .curved-text {
+                    color:  @magenta-color;
+                }
+                
+                .add-two-balls {
+                    background: @magenta-color;
+                    
+                    &:hover {
+                        cursor: default;
+                        background: @magenta-color;
+                    }
+                    
+                    &:active {
+                        background: @magenta-color;
+                    }
+                }
+            }
+        }
+        
+        .wheel-middle-ring,
+        .wheel-inner-ring {
+            .grey();
+        }
+    }
+    
+    &.inactive {
+        .grey();
+        
+        .user-tab {
+            .user-container {
+                .grey();
+                
+                .curved-text {
+                    color: @grey-color;
+                }
+                    
+                .add-two-balls {
+                    background: @grey-color;
+                    
+                    &:hover {
+                        cursor: default;
+                        background: @grey-color;
+                    }
+                    
+                    &:active {
+                        background: @grey-color;
+                    }
+                }
+                
+                &.waiting {
+                    .green();
+                    
+                    .curved-text {
+                        color: @green-color;
+                    }
+                        
+                    .add-two-balls {
+                        background: @green-color;
+                        
+                        &:hover {
+                            cursor: default;
+                            background: @green-color;
+                        }
+                        
+                        &:active {
+                            background: @green-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .wheel-middle-ring,
+        .wheel-inner-ring {
+            .grey();
+        }
     }
     
     @media (max-width: @screen-xs-max) { 
@@ -179,6 +268,11 @@ html, body, .wrapper {
         z-index: 3;
         border-style: solid;
         border-width: @wheel-ring-thickness;
+        
+        &.error,
+        &.inactive {
+            .grey();
+        }
     }
     
     .wheel-inner-ring {
@@ -190,6 +284,11 @@ html, body, .wrapper {
         z-index: 3;
         border-style: solid;
         border-width: @wheel-ring-thickness;
+        
+        &.error,
+        &.inactive {
+            .grey();
+        }
     }
 }
 
@@ -230,6 +329,18 @@ html, body, .wrapper {
                 background: @cyan-color;
             }
         }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
+            }
+        }
     }
     
     &.magentaRing {
@@ -246,6 +357,18 @@ html, body, .wrapper {
                 background: @magenta-color;
             }
         }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
+            }
+        }
     }
     
     &.greenRing {
@@ -260,6 +383,18 @@ html, body, .wrapper {
             
             .inner-ring {
                 background: @green-color;
+            }
+        }
+        
+        &.error {
+            .grey();
+            
+            .middle-ring {
+                .grey();
+                
+                .inner-ring {
+                    background: @grey-color;
+                }
             }
         }
     }
